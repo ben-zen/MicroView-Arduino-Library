@@ -225,58 +225,6 @@ private:
 	int readSerial(void);
 };
 
-class MicroViewWidget {
-public:
-	bool needFirstDraw;
-	MicroViewWidget(uint8_t newx, uint8_t newy, int16_t min, int16_t max);
-	uint8_t getX();
-	uint8_t getY();
-	void setX(uint8_t newx);
-	void setY(uint8_t newy);
-	
-	int16_t getMinValue();
-	int16_t getMaxValue();
-	int16_t getValue();
-	void setMaxValue(int16_t max);
-	void setMinValue(int16_t max);
-	void setValue(int16_t val);
-	uint8_t getMaxValLen();
-	/** \brief Draw widget value overridden by child class. */
-    virtual void draw(){};
-    /** \brief Draw widget face overridden by child class. */
-	virtual void drawFace(){};
-	void reDraw();
-	
-private:
-	uint8_t x;
-	uint8_t y;
-	int16_t maxValue;
-	int16_t minValue;
-	int16_t value;
-};
-
-class MicroViewSlider: public MicroViewWidget{
-public:
-	MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_t max);
-	MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_t max, uint8_t sty);
-	void draw();
-	void drawFace();
-private:
-	uint8_t totalTicks, style;
-	int16_t prevValue;
-};
-
-class MicroViewGauge: public MicroViewWidget{
-public:
-	MicroViewGauge(uint8_t newx, uint8_t newy, int16_t min, int16_t max);
-	MicroViewGauge(uint8_t newx, uint8_t newy, int16_t min, int16_t max, uint8_t sty);
-	void draw();
-	void drawFace();
-private:
-	uint8_t radius, style;
-	int16_t prevValue;
-};
-
 #define SPI_CLOCK_DIV4 0x00
 #define SPI_CLOCK_DIV16 0x01
 #define SPI_CLOCK_DIV64 0x02
