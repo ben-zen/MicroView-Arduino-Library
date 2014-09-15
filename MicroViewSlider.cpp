@@ -9,9 +9,12 @@
 
   Initialise the MicroViewSlider widget with default style.
 */
-MicroViewSlider::MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_t max):MicroViewWidget(newx, newy, min, max) {
-  style=0;
-  totalTicks=30;
+MicroViewSlider::MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min,
+                                 int16_t max):
+  MicroViewWidget(newx, newy, min, max),
+  style(0),
+  totalTicks(30)
+{
   prevValue=getMinValue();
   needFirstDraw=true;
   drawFace();
@@ -22,7 +25,10 @@ MicroViewSlider::MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_
 
   Initialise the MicroViewSlider widget with style WIDGETSTYLE0 or WIDGETSTYLE1 or WIDGETSTYLE2 (like 0, but vertical) or WIDGETSTYLE3 (like 1, but vertical). If this list gets any longer, it might be better as a switch/case statement.
 */
-MicroViewSlider::MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_t max, uint8_t sty):MicroViewWidget(newx, newy, min, max) {
+MicroViewSlider::MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min,
+                                 int16_t max, uint8_t sty):
+  MicroViewWidget(newx, newy, min, max)
+{
   if (sty==WIDGETSTYLE1) {
     style=1;
     totalTicks=60;
@@ -39,9 +45,8 @@ MicroViewSlider::MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_
     style=0;
     totalTicks=30;
   }
-
+  needFirstDraw = true;
   prevValue=getMinValue();
-  needFirstDraw=true;
   drawFace();
   draw();
 }

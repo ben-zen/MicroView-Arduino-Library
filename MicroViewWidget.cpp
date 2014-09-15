@@ -2,21 +2,19 @@
 
 #include "MicroViewWidget.h"
 
-// -------------------------------------------------------------------------------------
-// MicroViewWidget Class - start
-// -------------------------------------------------------------------------------------
-
 /** \brief MicroView widget parent class.
 
   The MicroViewWidget class is the parent class for child widget like MicroViewSlider and MicroViewGauge.
 */
-MicroViewWidget::MicroViewWidget(uint8_t newx, uint8_t newy, int16_t min, int16_t max) {
-  setX(newx);
-  setY(newy);
-  value=0;
-  setMinValue(min);
-  setMaxValue(max);
-}
+MicroViewWidget::MicroViewWidget(uint8_t newx, uint8_t newy, int16_t min,
+                                 int16_t max):
+  x(newx),
+  y(newy),
+  value(0),
+  minValue(min),
+  maxValue(max),
+  needFirstDraw(false)
+{ };
 
 /** \brief Get widget x position. */
 uint8_t MicroViewWidget::getX() { return x; }
@@ -29,6 +27,10 @@ void MicroViewWidget::setX(uint8_t newx) { x = newx; }
 
 /** \brief Set widget y position. */
 void MicroViewWidget::setY(uint8_t newy) { y = newy; }
+
+bool MicroViewWidget::needsFirstDraw() const { 
+  return needFirstDraw;
+};
 
 /** \brief Get minimum value.
 
