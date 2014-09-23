@@ -648,6 +648,58 @@ void MicroView::circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color
 	}
 }
 
+void MicroView::circle_fill_alt(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
+                                color, uint8_t mode){
+  int x = radius;
+  int y = 0;
+  int radiusError = 1 - x;
+  int y_last = y0 + x;
+  while (x >= y) {
+    pixel(x + x0, y + y0, color, mode);
+    pixel(x0 - x, y + y0, color, mode);
+    int x_alt = (x0 - x) + 1;
+    int x_alt_max = x0 + x;
+    while (x_alt < x_alt_max) { // Fill the line between these two points
+      pixel(x_alt, y + y0, color, mode);
+      x_alt++;
+    }
+    pixel(y + x0, x + y0, color, mode);
+    pixel(y + x0, y0 - x, color, mode);
+    if (y != 0) {
+      pixel(x + x0, y0 - y, color, mode);
+      pixel(x0 - x, y0 - y, color, mode);
+      x_alt = (x0 - x) + 1;
+      x_alt_max = x0 + x;
+      while (x_alt < x_alt_max) {
+        pixel(x_alt, y0 - y, color, mode);
+        x_alt++;
+      }
+      pixel(x0 - y, x + y0, color, mode);
+      pixel(x0 - y, y0 - x, color, mode);
+      if (y_last > y0 + x) {
+        x_alt = x0 - y + 1;
+        x_alt_max = x0 + y;
+        y_last = y0 + x;
+        int y_low = y0 - x;
+        while (x_alt < x_alt_max) {
+          pixel(x_alt, y_last, color, mode);
+          pixel(x_alt, y_low, color, mode);
+          x_alt++;
+        }
+      }
+    }
+    y++;
+    if (radiusError<0) {
+      radiusError += 2 * y + 1;
+    }
+    else {
+      x--;
+      radiusError += 2 * (y - x + 1);
+    }
+  }
+
+}
+
 /** \brief Get LCD height.
 
 	The height of the LCD return as byte.
