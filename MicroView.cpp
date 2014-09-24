@@ -650,6 +650,7 @@ void MicroView::circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color
 	}
 }
 
+
 void MicroView::circle_fill_alt(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
                                 color, uint8_t mode){
   int8_t x = radius;
@@ -661,35 +662,37 @@ void MicroView::circle_fill_alt(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
   int8_t x_alt_max;
   while (x >= y) {
     pixel(x + x0, y + y0, color, mode);
-    pixel(x0 - x, y + y0, color, mode);
-    x_alt = (x0 - x) + 1;
+    x_alt = (x0 - x);
     x_alt_max = x0 + x;
     while (x_alt < x_alt_max) { // Fill the line between these two points
       pixel(x_alt, y + y0, color, mode);
       x_alt++;
     }
-    pixel(y + x0, x + y0, color, mode);
-    pixel(y + x0, y0 - x, color, mode);
+    if (y != x) {
+      pixel(y + x0, x + y0, color, mode);
+      pixel(y + x0, y0 - x, color, mode);
+    }
     if (y != 0) {
       pixel(x + x0, y0 - y, color, mode);
-      pixel(x0 - x, y0 - y, color, mode);
-      x_alt = (x0 - x) + 1;
+      x_alt = (x0 - x);
       x_alt_max = x0 + x;
       while (x_alt < x_alt_max) {
         pixel(x_alt, y0 - y, color, mode);
         x_alt++;
       }
-      pixel(x0 - y, x + y0, color, mode);
-      pixel(x0 - y, y0 - x, color, mode);
-      if (y_last > y0 + x) {
-        x_alt = x0 - y + 1;
-        x_alt_max = x0 + y;
-        y_last = y0 + x;
-        y_low = y0 - x;
-        while (x_alt < x_alt_max) {
-          pixel(x_alt, y_last, color, mode);
-          pixel(x_alt, y_low, color, mode);
-          x_alt++;
+      if (y != x) {
+        pixel(x0 - y, x + y0, color, mode);
+        pixel(x0 - y, y0 - x, color, mode);
+        if (y_last > y0 + x) {
+          x_alt = x0 - y + 1;
+          x_alt_max = x0 + y;
+          y_last = y0 + x;
+          y_low = y0 - x;
+          while (x_alt < x_alt_max) {
+            pixel(x_alt, y_last, color, mode);
+            pixel(x_alt, y_low, color, mode);
+            x_alt++;
+          }
         }
       }
     }
