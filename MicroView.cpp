@@ -729,6 +729,14 @@ uint8_t MicroView::setFontType(uint8_t type) {
 	return true;
 }
 
+uint8_t MicroView::getColor(void) const {
+	return foreColor;
+}
+
+uint8_t MicroView::getDrawMode(void) const {
+	return drawMode;
+}
+
 /** \brief Set color.
 
 	Set the current draw's color. Only WHITE and BLACK available.

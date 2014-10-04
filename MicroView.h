@@ -190,6 +190,8 @@ public:
 	void drawBitmap(void);
 	uint8_t getLCDWidth(void);
 	uint8_t getLCDHeight(void);
+	uint8_t getColor(void) const;
+	uint8_t getDrawMode(void) const;
 	void setColor(uint8_t color);
 	void setDrawMode(uint8_t mode);
 	uint8_t *getScreenBuffer(void);
