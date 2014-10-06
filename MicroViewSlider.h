@@ -6,7 +6,7 @@
 
 #include "MicroViewWidget.h"
 
-class MicroViewSlider: public MicroViewWidget{
+class MicroViewSlider: public MicroViewWidget {
 public:
   MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_t max);
   MicroViewSlider(uint8_t newx, uint8_t newy, int16_t min, int16_t max, uint8_t sty);

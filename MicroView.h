@@ -183,11 +183,14 @@ public:
 	void rectFill(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color , uint8_t mode);
 	void circle(uint8_t x, uint8_t y, uint8_t radius);
 	void circle(uint8_t x, uint8_t y, uint8_t radius, uint8_t color, uint8_t mode);
-	void circleFill(uint8_t x0, uint8_t y0, uint8_t radius);
-	void circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color, uint8_t mode);
+        void circleFill(uint8_t x0, uint8_t y0, uint8_t radius);
+	void circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color,
+           uint8_t mode);
+        void circle_fill_alt(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
+                             color, uint8_t mode);
 	void drawChar(uint8_t x, uint8_t y, uint8_t c);
 	void drawChar(uint8_t x, uint8_t y, uint8_t c, uint8_t color, uint8_t mode);
-	void drawBitmap(void);
+	// void drawBitmap(void);
 	uint8_t getLCDWidth(void);
 	uint8_t getLCDHeight(void);
 	uint8_t getColor(void) const;

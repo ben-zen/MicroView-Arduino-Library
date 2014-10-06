@@ -7,12 +7,13 @@
 
 class MicroViewWidget {
 public:
-  bool needFirstDraw;
+
   MicroViewWidget(uint8_t newx, uint8_t newy, int16_t min, int16_t max);
   uint8_t getX();
   uint8_t getY();
   void setX(uint8_t newx);
   void setY(uint8_t newy);
+  bool needsFirstDraw() const;
   
   int16_t getMinValue();
   int16_t getMaxValue();
@@ -24,8 +25,11 @@ public:
   virtual void draw() = 0;
   virtual void drawFace() = 0;
   void reDraw();
+
+  bool needFirstDraw;
   
 private:
+
   uint8_t x;
   uint8_t y;
   int16_t maxValue;
