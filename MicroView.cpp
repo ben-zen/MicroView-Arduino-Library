@@ -608,50 +608,7 @@ void MicroView::circleFill(uint8_t x0, uint8_t y0, uint8_t radius) {
 
 	Draw filled circle with radius using color and mode at x,y of the screen buffer.
 */
-void MicroView::circleFill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color, uint8_t mode) {
-	// Don't bother trying to draw something totally offscreen
-	if (x0 - radius >= LCDWIDTH || y0 - radius >= LCDHEIGHT) {
-		return;
-	}
-
-	// High-level algorithm overview:
-	// Scan horizontally from left to right, then top to bottom, checking if each pixel
-	// is within the circle. We use uint16_t's because even the small screen squares beyond 8 bits.
-	uint16_t radiusSq = radius * radius;
-
-	// Optimization: define the start and end onscreen
-	uint16_t xStart = max(0, x0-radius);
-	uint16_t xEnd = min(LCDWIDTH-1, x0+radius);
-	uint16_t yStart = max(0, y0-radius);
-	uint16_t yEnd = min(LCDHEIGHT-1, y0+radius);
-
-	// scan horizontally...
-	for (uint16_t x = xStart; x <= xEnd; ++x) {
-		// Optimization: Record where if we have intersected the circle on this vertical
-		// scan. Once we have intersected, then don't intersect anymore, don't bother
-		// drawing; we've exited the circle.
-		bool intersected = false;
-
-		// Optimization: relative x squared only changes with the outer loop/the horizontal scan.
-		int16_t rx2 = (x-x0) * (x-x0);
-
-		// Scan vertically...
-		for (uint16_t y = yStart; y <= yEnd; ++y) {
-			int16_t ry2 = (y-y0) * (y-y0);
-			if (rx2 + ry2 <= radiusSq) {
-				pixel(x, y, color, mode);
-				intersected = true;
-			}
-			else if (intersected) {
-				// We've left the circle. Move on to the next horizontal scan line.
-				break;
-			}
-		}
-	}
-}
-
-
-void MicroView::circle_fill_alt(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
+void MicroView::circle_fill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
                                 color, uint8_t mode){
   int8_t x = radius;
   int8_t y = 0;
