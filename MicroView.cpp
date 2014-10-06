@@ -608,8 +608,8 @@ void MicroView::circleFill(uint8_t x0, uint8_t y0, uint8_t radius) {
 
 	Draw filled circle with radius using color and mode at x,y of the screen buffer.
 */
-void MicroView::circle_fill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t
-                                color, uint8_t mode){
+void MicroView::circle_fill(uint8_t x0, uint8_t y0, uint8_t radius, uint8_t color,
+	uint8_t mode) {
   int8_t x = radius;
   int8_t y = 0;
   int8_t radiusError = 1 - x;

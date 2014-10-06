@@ -222,7 +222,6 @@ public:
 private:
 	uint8_t foreColor,drawMode,fontWidth, fontHeight, fontType, fontStartChar, fontTotalChar, cursorX, cursorY;
 	uint16_t fontMapWidth;
-	//unsigned char *fontsPointer[TOTALFONTS];
 	static const unsigned char *fontsPointer[];
 	
 	int readSerial(void);
